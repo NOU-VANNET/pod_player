@@ -4,6 +4,7 @@ class OptionTile extends StatelessWidget {
   final String title;
   final IconData icon;
   final String? subText;
+  final Widget? iconWidget;
   final void Function()? onTap;
   final EdgeInsets? margin;
   const OptionTile({
@@ -13,6 +14,7 @@ class OptionTile extends StatelessWidget {
     this.subText,
     this.onTap,
     this.margin,
+    this.iconWidget,
   }) : super(key: key);
 
   @override
@@ -20,7 +22,7 @@ class OptionTile extends StatelessWidget {
     return Padding(
       padding: margin ?? EdgeInsets.zero,
       child: ListTile(
-        leading: Icon(icon),
+        leading: iconWidget ?? Icon(icon),
         onTap: onTap,
         title: FittedBox(
           fit: BoxFit.scaleDown,

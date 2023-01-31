@@ -2,7 +2,7 @@ part of 'package:pod_player/src/pod_player.dart';
 
 class _WebSettingsDropdown extends StatefulWidget {
   final String tag;
-  final List<OptionTile>? options;
+  final List<Widget>? options;
 
   const _WebSettingsDropdown({
     Key? key,
@@ -38,7 +38,7 @@ class _WebSettingsDropdownState extends State<_WebSettingsDropdown> {
                 items: widget.options != null ?
                 List.generate(widget.options!.length, (idx) {
                   return PopupMenuItem(
-                    value: widget.options![idx].title,
+                    value: '${widget.options![idx]}',
                     child: widget.options![idx],
                   );
                 }) : [

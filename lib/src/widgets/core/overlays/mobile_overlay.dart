@@ -1,7 +1,7 @@
 part of 'package:pod_player/src/pod_player.dart';
 
 class _MobileOverlay extends StatelessWidget {
-  final List<OptionTile>? options;
+  final List<Widget>? options;
   final String tag;
   final void Function()? toggleVideoFit;
   final void Function()? onBack;
@@ -114,7 +114,7 @@ class _MobileOverlay extends StatelessWidget {
           Align(
             alignment: Alignment.bottomLeft,
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 18),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 18),
               child: _MobileOverlayBottomController(
                 tag: tag,
                 toggleVideoFit: toggleVideoFit,
@@ -130,7 +130,7 @@ class _MobileOverlay extends StatelessWidget {
     return false;
   }
 
-  void _bottomSheet(BuildContext context, {List<OptionTile>? ops}) {
+  void _bottomSheet(BuildContext context, {List<Widget>? ops}) {
     showModalBottomSheet(
       context: context,
       builder: (context) => _MobileBottomSheet(tag: tag, options: ops),

@@ -4,7 +4,7 @@ class _PodCoreVideoPlayer extends StatelessWidget {
   final VideoPlayerController videoPlayerCtr;
   final double videoAspectRatio;
   final String tag;
-  final List<OptionTile>? options;
+  final List<Widget>? options;
   final VideoFit fit;
   final Widget? videoOverlay;
   final void Function()? toggleVideoFit;
@@ -91,7 +91,7 @@ class _PodCoreVideoPlayer extends StatelessWidget {
                   },
                 ),
               ),
-              videoOverlay ?? SizedBox.shrink(),
+              videoOverlay ?? const SizedBox.shrink(),
               _VideoOverlays(
                 tag: tag,
                 options: options,

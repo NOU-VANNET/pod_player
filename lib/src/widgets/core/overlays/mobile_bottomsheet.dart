@@ -1,7 +1,7 @@
 part of 'package:pod_player/src/pod_player.dart';
 
 class _MobileBottomSheet extends StatelessWidget {
-  final List<OptionTile>? options;
+  final List<Widget>? options;
   final String tag;
 
   const _MobileBottomSheet({

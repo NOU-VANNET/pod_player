@@ -49,7 +49,7 @@ class PodVideoPlayer extends StatefulWidget {
 
 
   ///Customize Option in bottom sheet
-  final List<OptionTile>? options;
+  final List<Widget>? options;
 
   /// Optional callback, fired when full screen mode toggles.
   ///

@@ -1,7 +1,7 @@
 part of 'package:pod_player/src/pod_player.dart';
 
 class _VideoOverlays extends StatelessWidget {
-  final List<OptionTile>? options;
+  final List<Widget>? options;
   final String tag;
   final void Function()? toggleVideoFit;
   final void Function()? onBack;

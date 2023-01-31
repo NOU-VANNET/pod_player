@@ -19,6 +19,7 @@ dependencies:
   wakelock: ^0.6.1+2 
   universal_html: ^2.0.8 
   youtube_explode_dart: ^1.11.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
