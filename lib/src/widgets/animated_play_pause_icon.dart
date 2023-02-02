@@ -3,19 +3,20 @@ part of 'package:pod_player/src/pod_player.dart';
 class _AnimatedPlayPauseIcon extends StatefulWidget {
   final double? size;
   final String tag;
+  final void Function(PodVideoState)? onPlayPause;
 
   const _AnimatedPlayPauseIcon({
     Key? key,
     this.size,
     required this.tag,
+    this.onPlayPause,
   }) : super(key: key);
 
   @override
   State<_AnimatedPlayPauseIcon> createState() => _AnimatedPlayPauseIconState();
 }
 
-class _AnimatedPlayPauseIconState extends State<_AnimatedPlayPauseIcon>
-    with SingleTickerProviderStateMixin {
+class _AnimatedPlayPauseIconState extends State<_AnimatedPlayPauseIcon> with SingleTickerProviderStateMixin {
   late final AnimationController _payCtr;
   late PodGetXVideoController _podCtr;
   @override
@@ -25,14 +26,14 @@ class _AnimatedPlayPauseIconState extends State<_AnimatedPlayPauseIcon>
       vsync: this,
       duration: const Duration(milliseconds: 450),
     );
-    _podCtr.addListenerId('podVideoState', playPauseListner);
+    _podCtr.addListenerId('podVideoState', playPauseListener);
     if (_podCtr.isvideoPlaying) {
       if (mounted) _payCtr.forward();
     }
     super.initState();
   }
 
-  void playPauseListner() {
+  void playPauseListener() {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       if (_podCtr.podVideoState == PodVideoState.playing) {
         if (mounted) _payCtr.forward();
@@ -65,8 +66,10 @@ class _AnimatedPlayPauseIconState extends State<_AnimatedPlayPauseIcon>
                     'Pause${kIsWeb ? ' (space)' : ''}'
                 : _podCtr.podPlayerLabels.play ??
                     'Play${kIsWeb ? ' (space)' : ''}',
-            onPressed:
-                _podCtr.isOverlayVisible ? _podCtr.togglePlayPauseVideo : null,
+            onPressed: _podCtr.isOverlayVisible ? () {
+              _podCtr.togglePlayPauseVideo();
+              widget.onPlayPause?.call(_podCtr.podVideoState);
+            } : null,
             child: onStateChange(_podCtr),
           ),
         );

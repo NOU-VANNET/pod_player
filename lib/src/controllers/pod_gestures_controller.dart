@@ -13,7 +13,7 @@ class _PodGesturesController extends _PodVideoQualityController {
 
   ///*handle double tap
 
-  void onLeftDoubleTap({int? seconds}) {
+  Future<Duration> onLeftDoubleTap({int? seconds}) async {
     isShowOverlay(true);
     leftDoubleTapTimer?.cancel();
     rightDoubleTapTimer?.cancel();
@@ -23,16 +23,17 @@ class _PodGesturesController extends _PodVideoQualityController {
     updateLeftTapDuration(
       leftDoubleTapduration += seconds ?? doubleTapForwardSeconds,
     );
-    seekBackward(Duration(seconds: seconds ?? doubleTapForwardSeconds));
+    final position = await seekBackward(Duration(seconds: seconds ?? doubleTapForwardSeconds));
     leftDoubleTapTimer = Timer(const Duration(milliseconds: 1500), () {
       isLeftDbTapIconVisible = false;
       updateLeftTapDuration(0);
       leftDoubleTapTimer?.cancel();
       isShowOverlay(false);
     });
+    return position;
   }
 
-  void onRightDoubleTap({int? seconds}) {
+  Future<Duration> onRightDoubleTap({int? seconds}) async {
     isShowOverlay(true);
     rightDoubleTapTimer?.cancel();
     leftDoubleTapTimer?.cancel();
@@ -42,13 +43,14 @@ class _PodGesturesController extends _PodVideoQualityController {
     updateRightTapDuration(
       rightDubleTapduration += seconds ?? doubleTapForwardSeconds,
     );
-    seekForward(Duration(seconds: seconds ?? doubleTapForwardSeconds));
+    final position = await seekForward(Duration(seconds: seconds ?? doubleTapForwardSeconds));
     rightDoubleTapTimer = Timer(const Duration(milliseconds: 1500), () {
       isRightDbTapIconVisible = false;
       updateRightTapDuration(0);
       rightDoubleTapTimer?.cancel();
       isShowOverlay(false);
     });
+    return position;
   }
 
   void onOverlayHover() {

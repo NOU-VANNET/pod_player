@@ -199,28 +199,28 @@ class PodPlayerController {
   Future<void> videoSeekForward(Duration _duration) async {
     await _checkAndWaitTillInitialized();
     if (!_isCtrInitialised) return;
-    return _ctr.seekForward(_duration);
+    await _ctr.seekForward(_duration);
   }
 
   ///Moves video backward from current duration to `_duration`
   Future<void> videoSeekBackward(Duration _duration) async {
     await _checkAndWaitTillInitialized();
     if (!_isCtrInitialised) return;
-    return _ctr.seekBackward(_duration);
+    await _ctr.seekBackward(_duration);
   }
 
   ///on right double tap
   Future<void> doubleTapVideoForward(int seconds) async {
     await _checkAndWaitTillInitialized();
     if (!_isCtrInitialised) return;
-    return _ctr.onRightDoubleTap(seconds: seconds);
+    await _ctr.onRightDoubleTap(seconds: seconds);
   }
 
   ///on left double tap
   Future<void> doubleTapVideoBackward(int seconds) async {
     await _checkAndWaitTillInitialized();
     if (!_isCtrInitialised) return;
-    return _ctr.onLeftDoubleTap(seconds: seconds);
+    await _ctr.onLeftDoubleTap(seconds: seconds);
   }
 
   /// Enables video player to fullscreen mode.

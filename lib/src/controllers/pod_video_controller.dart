@@ -29,13 +29,17 @@ class _PodVideoController extends _PodUiController {
   }
 
   /// Seek video forward by the duration.
-  Future<void> seekForward(Duration videoSeekDuration) async {
-    await seekTo(_videoCtr!.value.position + videoSeekDuration);
+  Future<Duration> seekForward(Duration videoSeekDuration) async {
+    final position = _videoCtr!.value.position + videoSeekDuration;
+    await seekTo(position);
+    return position;
   }
 
   /// Seek video backward by the duration.
-  Future<void> seekBackward(Duration videoSeekDuration) async {
-    await seekTo(_videoCtr!.value.position - videoSeekDuration);
+  Future<Duration> seekBackward(Duration videoSeekDuration) async {
+    final position = _videoCtr!.value.position - videoSeekDuration;
+    await seekTo(position);
+    return position;
   }
 
   ///mute

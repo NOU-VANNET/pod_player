@@ -5,6 +5,8 @@ class _MobileOverlay extends StatelessWidget {
   final String tag;
   final void Function()? toggleVideoFit;
   final void Function()? onBack;
+  final void Function(Duration)? onDragSeek;
+  final void Function(PodVideoState)? onPlayPause;
 
   const _MobileOverlay({
     Key? key,
@@ -12,6 +14,8 @@ class _MobileOverlay extends StatelessWidget {
     this.options,
     this.toggleVideoFit,
     this.onBack,
+    this.onDragSeek,
+    this.onPlayPause,
   }) : super(key: key);
 
   @override
@@ -47,7 +51,13 @@ class _MobileOverlay extends StatelessWidget {
                   child: SizedBox(
                     height: double.infinity,
                     child: Center(
-                      child: _AnimatedPlayPauseIcon(tag: tag, size: 42),
+                      child: _AnimatedPlayPauseIcon(
+                        tag: tag,
+                        size: 42,
+                        onPlayPause: (videoState) {
+                          onPlayPause?.call(videoState);
+                        },
+                      ),
                     ),
                   ),
                 ),
@@ -56,8 +66,14 @@ class _MobileOverlay extends StatelessWidget {
                 child: _VideoGestureDetector(
                   tag: tag,
                   onDoubleTap: _isRtl()
-                      ? _podCtr.onLeftDoubleTap
-                      : _podCtr.onRightDoubleTap,
+                      ? () async {
+                          final position = await _podCtr.onLeftDoubleTap();
+                          onDragSeek?.call(position);
+                        }
+                      : () async {
+                          final position = await _podCtr.onRightDoubleTap();
+                          onDragSeek?.call(position);
+                        },
                   child: ColoredBox(
                     color: overlayColor,
                     child: _LeftRightDoubleTapBox(
@@ -72,7 +88,7 @@ class _MobileOverlay extends StatelessWidget {
           Align(
             alignment: Alignment.topCenter,
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 18),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 18),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -80,9 +96,7 @@ class _MobileOverlay extends StatelessWidget {
                     toolTipMesg: _podCtr.podPlayerLabels.settings,
                     color: itemColor,
                     onPressed: () {
-                      if (onBack != null) {
-                        onBack!();
-                      }
+                      onBack?.call();
                     },
                     child: const Icon(
                       Icons.arrow_back,
@@ -118,6 +132,9 @@ class _MobileOverlay extends StatelessWidget {
               child: _MobileOverlayBottomController(
                 tag: tag,
                 toggleVideoFit: toggleVideoFit,
+                onDragSeek: (position) {
+                  onDragSeek?.call(position);
+                },
               ),
             ),
           ),

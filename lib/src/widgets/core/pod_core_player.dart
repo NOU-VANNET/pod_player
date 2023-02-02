@@ -10,6 +10,9 @@ class _PodCoreVideoPlayer extends StatelessWidget {
   final void Function()? toggleVideoFit;
   final void Function()? onBack;
 
+  final void Function(Duration)? onDragSeek;
+  final void Function(PodVideoState)? onPlayPause;
+
   const _PodCoreVideoPlayer({
     Key? key,
     required this.videoPlayerCtr,
@@ -20,13 +23,15 @@ class _PodCoreVideoPlayer extends StatelessWidget {
     this.toggleVideoFit,
     this.videoOverlay,
     this.onBack,
+    this.onDragSeek,
+    this.onPlayPause,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final _podCtr = Get.find<PodGetXVideoController>(tag: tag);
     return Builder(
-      builder: (_ctrx) {
+      builder: (ctr) {
         return RawKeyboardListener(
           autofocus: true,
           focusNode:
@@ -34,7 +39,7 @@ class _PodCoreVideoPlayer extends StatelessWidget {
                   FocusNode(),
           onKey: (value) => _podCtr.onKeyBoardEvents(
             event: value,
-            appContext: _ctrx,
+            appContext: ctr,
             tag: tag,
           ),
           child: Stack(
@@ -97,6 +102,8 @@ class _PodCoreVideoPlayer extends StatelessWidget {
                 options: options,
                 toggleVideoFit: toggleVideoFit,
                 onBack: onBack,
+                onPlayPause: onPlayPause,
+                onDragSeek: onDragSeek,
               ),
               IgnorePointer(
                 child: GetBuilder<PodGetXVideoController>(

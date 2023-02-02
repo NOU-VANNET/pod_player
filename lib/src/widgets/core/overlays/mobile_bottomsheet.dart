@@ -144,10 +144,12 @@ class _VideoPlaybackSelectorMob extends StatelessWidget {
 class _MobileOverlayBottomController extends StatelessWidget {
   final String tag;
   final void Function()? toggleVideoFit;
+  final void Function(Duration)? onDragSeek;
 
   const _MobileOverlayBottomController({
     Key? key,
     required this.tag,
+    this.onDragSeek,
     this.toggleVideoFit,
   }) : super(key: key);
 
@@ -229,6 +231,9 @@ class _MobileOverlayBottomController extends StatelessWidget {
                       tag: tag,
                       alignment: Alignment.topCenter,
                       podProgressBarConfig: _podCtr.podProgressBarConfig,
+                      onDragSeek: (position) {
+                        onDragSeek?.call(position);
+                      },
                     ),
                   ),
                 );
@@ -239,6 +244,9 @@ class _MobileOverlayBottomController extends StatelessWidget {
                   tag: tag,
                   alignment: Alignment.bottomCenter,
                   podProgressBarConfig: _podCtr.podProgressBarConfig,
+                  onDragSeek: (position) {
+                    onDragSeek?.call(position);
+                  },
                 ),
               );
             },

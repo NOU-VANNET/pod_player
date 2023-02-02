@@ -14,16 +14,17 @@ class PodProgressBar extends StatefulWidget {
     this.onDragStart,
     this.onDragEnd,
     this.onDragUpdate,
+    this.onDragSeek,
     this.alignment = Alignment.center,
     required this.tag,
-  })  : podProgressBarConfig =
-            podProgressBarConfig ?? const PodProgressBarConfig(),
+  })  : podProgressBarConfig = podProgressBarConfig ?? const PodProgressBarConfig(),
         super(key: key);
 
   final PodProgressBarConfig podProgressBarConfig;
   final Function()? onDragStart;
   final Function()? onDragEnd;
   final Function()? onDragUpdate;
+  final Function(Duration)? onDragSeek;
   final Alignment alignment;
   final String tag;
 
@@ -41,9 +42,9 @@ class _PodProgressBarState extends State<PodProgressBar> {
     if (box != null) {
       final Offset tapPos = box.globalToLocal(globalPosition);
       final double relative = tapPos.dx / box.size.width;
-      final Duration position =
-          (videoPlayerValue?.duration ?? Duration.zero) * relative;
+      final Duration position = (videoPlayerValue?.duration ?? Duration.zero) * relative;
       _podCtr.seekTo(position);
+      widget.onDragSeek?.call(position);
     }
   }
 
