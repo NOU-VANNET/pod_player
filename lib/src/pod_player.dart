@@ -254,9 +254,6 @@ class _PodVideoPlayerState extends State<PodVideoPlayer>
   }
 
   Widget _buildPlayer() {
-    final _videoAspectRatio = widget.matchVideoAspectRatioToFrame
-        ? _podCtr.videoCtr?.value.aspectRatio ?? widget.videoAspectRatio
-        : widget.videoAspectRatio;
     return GetBuilder<PodGetXVideoController>(
       tag: widget.controller.getTag,
       id: 'full-screen',
@@ -271,6 +268,8 @@ class _PodVideoPlayerState extends State<PodVideoPlayer>
           onBack: widget.onBack,
           fit: widget.fit,
           toggleVideoFit: widget.toggleVideoFit,
+          onDragSeek: widget.onDragSeek,
+          onPlayPause: widget.onPlayPause,
         );
       },
     );
