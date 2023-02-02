@@ -72,7 +72,7 @@ class PodGetXVideoController extends _PodGesturesController {
       Future.delayed(const Duration(milliseconds: 600))
           .then((value) => _isWebAutoPlayDone = true);
     } catch (e) {
-      podVideoStateChanger(PodVideoState.error);
+      await podVideoStateChanger(PodVideoState.error);
       update(['errorState']);
       update(['update-all']);
       podLog('ERROR ON POD_PLAYER:  $e');
@@ -256,9 +256,9 @@ class PodGetXVideoController extends _PodGesturesController {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
       if (autoPlay && (isVideoUiBinded ?? false)) {
         if (kIsWeb) await _videoCtr?.setVolume(0);
-        podVideoStateChanger(PodVideoState.playing);
+        await podVideoStateChanger(PodVideoState.playing);
       } else {
-        podVideoStateChanger(PodVideoState.paused);
+        await podVideoStateChanger(PodVideoState.paused);
       }
     });
   }
@@ -268,15 +268,15 @@ class PodGetXVideoController extends _PodGesturesController {
     required PodPlayerConfig playerConfig,
   }) async {
     _videoCtr?.removeListener(videoListner);
-    podVideoStateChanger(PodVideoState.paused);
-    podVideoStateChanger(PodVideoState.loading);
-    keyboardFocusWeb?.removeListener(keyboadListner);
+    await podVideoStateChanger(PodVideoState.paused);
+    await podVideoStateChanger(PodVideoState.loading);
+    keyboardFocusWeb?.removeListener(keyboardListener);
     removeListenerId('podVideoState', podStateListner);
     _isWebAutoPlayDone = false;
     vimeoOrVideoUrls = [];
     config(playVideoFrom: playVideoFrom, playerConfig: playerConfig);
     keyboardFocusWeb?.requestFocus();
-    keyboardFocusWeb?.addListener(keyboadListner);
+    keyboardFocusWeb?.addListener(keyboardListener);
     await videoInit();
   }
 }

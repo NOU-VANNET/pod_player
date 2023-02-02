@@ -66,8 +66,8 @@ class _AnimatedPlayPauseIconState extends State<_AnimatedPlayPauseIcon> with Sin
                     'Pause${kIsWeb ? ' (space)' : ''}'
                 : _podCtr.podPlayerLabels.play ??
                     'Play${kIsWeb ? ' (space)' : ''}',
-            onPressed: _podCtr.isOverlayVisible ? () {
-              _podCtr.togglePlayPauseVideo();
+            onPressed: _podCtr.isOverlayVisible ? () async {
+              await _podCtr.togglePlayPauseVideo();
               widget.onPlayPause?.call(_podCtr.podVideoState);
             } : null,
             child: onStateChange(_podCtr),

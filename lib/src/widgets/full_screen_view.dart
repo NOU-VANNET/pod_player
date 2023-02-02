@@ -18,7 +18,7 @@ class _FullScreenViewState extends State<FullScreenView>
   void initState() {
     _podCtr = Get.find<PodGetXVideoController>(tag: widget.tag);
     _podCtr.fullScreenContext = context;
-    _podCtr.keyboardFocusWeb?.removeListener(_podCtr.keyboadListner);
+    _podCtr.keyboardFocusWeb?.removeListener(_podCtr.keyboardListener);
 
     super.initState();
   }
@@ -26,7 +26,7 @@ class _FullScreenViewState extends State<FullScreenView>
   @override
   void dispose() {
     _podCtr.keyboardFocusWeb?.requestFocus();
-    _podCtr.keyboardFocusWeb?.addListener(_podCtr.keyboadListner);
+    _podCtr.keyboardFocusWeb?.addListener(_podCtr.keyboardListener);
     super.dispose();
   }
 

@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -134,7 +133,7 @@ class _PodVideoPlayerState extends State<PodVideoPlayer>
     if (kIsWeb) {
       if (widget.controller.podPlayerConfig.forcedVideoFocus) {
         _podCtr.keyboardFocusWeb = FocusNode();
-        _podCtr.keyboardFocusWeb?.addListener(_podCtr.keyboadListner);
+        _podCtr.keyboardFocusWeb?.addListener(_podCtr.keyboardListener);
       }
       //to disable mouse right click
       _html.document.onContextMenu.listen((event) => event.preventDefault());
@@ -155,7 +154,7 @@ class _PodVideoPlayerState extends State<PodVideoPlayer>
       ..isVideoUiBinded = false
       ..podVideoStateChanger(PodVideoState.paused, updateUi: false);
     if (kIsWeb) {
-      _podCtr.keyboardFocusWeb?.removeListener(_podCtr.keyboadListner);
+      _podCtr.keyboardFocusWeb?.removeListener(_podCtr.keyboardListener);
     }
     // _podCtr.keyboardFocus?.unfocus();
     // _podCtr.keyboardFocusOnFullScreen?.unfocus();
