@@ -45,6 +45,7 @@ class PodVideoPlayer extends StatefulWidget {
   final Color? backgroundColor;
   final DecorationImage? videoThumbnail;
   final VideoFit fit;
+  final bool showOptions;
 
   final void Function(Duration)? onDragSeek;
   final void Function(PodVideoState)? onPlayPause;
@@ -89,6 +90,7 @@ class PodVideoPlayer extends StatefulWidget {
     this.onBack,
     this.onDragSeek,
     this.onPlayPause,
+    this.showOptions = true,
   }) : super(key: key) {
     addToUiController();
   }
@@ -269,6 +271,7 @@ class _PodVideoPlayerState extends State<PodVideoPlayer>
           toggleVideoFit: widget.toggleVideoFit,
           onDragSeek: widget.onDragSeek,
           onPlayPause: widget.onPlayPause,
+          showOptions: widget.showOptions,
         );
       },
     );

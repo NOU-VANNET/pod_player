@@ -7,6 +7,7 @@ class _MobileOverlay extends StatelessWidget {
   final void Function()? onBack;
   final void Function(Duration)? onDragSeek;
   final void Function(PodVideoState)? onPlayPause;
+  final bool showOptions;
 
   const _MobileOverlay({
     Key? key,
@@ -16,6 +17,7 @@ class _MobileOverlay extends StatelessWidget {
     this.onBack,
     this.onDragSeek,
     this.onPlayPause,
+    this.showOptions = true,
   }) : super(key: key);
 
   @override
@@ -107,20 +109,21 @@ class _MobileOverlay extends StatelessWidget {
                       child: _podCtr.videoTitle ?? const SizedBox(),
                     ),
                   ),
-                  MaterialIconButton(
-                    toolTipMesg: _podCtr.podPlayerLabels.settings,
-                    color: itemColor,
-                    onPressed: () {
-                      if (_podCtr.isOverlayVisible) {
-                        _bottomSheet(context, ops: options);
-                      } else {
-                        _podCtr.toggleVideoOverlay();
-                      }
-                    },
-                    child: const Icon(
-                      Icons.more_vert_rounded,
+                  if (showOptions)
+                    MaterialIconButton(
+                      toolTipMesg: _podCtr.podPlayerLabels.settings,
+                      color: itemColor,
+                      onPressed: () {
+                        if (_podCtr.isOverlayVisible) {
+                          _bottomSheet(context, ops: options);
+                        } else {
+                          _podCtr.toggleVideoOverlay();
+                        }
+                      },
+                      child: const Icon(
+                        Icons.more_vert_rounded,
+                      ),
                     ),
-                  ),
                 ],
               ),
             ),

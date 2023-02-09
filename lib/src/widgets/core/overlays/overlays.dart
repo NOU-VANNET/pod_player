@@ -7,6 +7,7 @@ class _VideoOverlays extends StatelessWidget {
   final void Function()? onBack;
   final void Function(Duration)? onDragSeek;
   final void Function(PodVideoState)? onPlayPause;
+  final bool showOptions;
 
   const _VideoOverlays({
     Key? key,
@@ -16,6 +17,7 @@ class _VideoOverlays extends StatelessWidget {
     this.onBack,
     this.onDragSeek,
     this.onPlayPause,
+    this.showOptions = true,
   }) : super(key: key);
 
   @override
@@ -70,6 +72,7 @@ class _VideoOverlays extends StatelessWidget {
                   onBack: onBack,
                   onDragSeek: onDragSeek,
                   onPlayPause: onPlayPause,
+                  showOptions: showOptions,
                 ),
               ],
             ),

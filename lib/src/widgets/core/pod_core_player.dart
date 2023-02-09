@@ -13,6 +13,8 @@ class _PodCoreVideoPlayer extends StatelessWidget {
   final void Function(Duration)? onDragSeek;
   final void Function(PodVideoState)? onPlayPause;
 
+  final bool showOptions;
+
   const _PodCoreVideoPlayer({
     Key? key,
     required this.videoPlayerCtr,
@@ -25,6 +27,7 @@ class _PodCoreVideoPlayer extends StatelessWidget {
     this.onBack,
     this.onDragSeek,
     this.onPlayPause,
+    this.showOptions = true,
   }) : super(key: key);
 
   @override
@@ -104,6 +107,7 @@ class _PodCoreVideoPlayer extends StatelessWidget {
                 onBack: onBack,
                 onPlayPause: onPlayPause,
                 onDragSeek: onDragSeek,
+                showOptions: showOptions,
               ),
               IgnorePointer(
                 child: GetBuilder<PodGetXVideoController>(
