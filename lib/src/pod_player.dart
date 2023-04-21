@@ -46,6 +46,7 @@ class PodVideoPlayer extends StatefulWidget {
   final DecorationImage? videoThumbnail;
   final VideoFit fit;
   final bool showOptions;
+  final Widget? backButton;
 
   final void Function(Duration)? onDragSeek;
   final void Function(PodVideoState)? onPlayPause;
@@ -91,6 +92,7 @@ class PodVideoPlayer extends StatefulWidget {
     this.onDragSeek,
     this.onPlayPause,
     this.showOptions = true,
+    this.backButton,
   }) : super(key: key) {
     addToUiController();
   }
@@ -272,6 +274,7 @@ class _PodVideoPlayerState extends State<PodVideoPlayer>
           onDragSeek: widget.onDragSeek,
           onPlayPause: widget.onPlayPause,
           showOptions: widget.showOptions,
+          backButton: widget.backButton,
         );
       },
     );
